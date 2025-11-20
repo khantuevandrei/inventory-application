@@ -30,23 +30,50 @@ async function createPokemonGet(req, res) {
   });
 }
 
-async function createPokemonPost(req, res) {
-  const { type, pokemon } = req.body;
+const alphaErr = "must only contain letters.";
+const lengthErr = "must be between 1 and 10 characters.";
 
-  try {
-    await db.createPokemon(type, pokemon);
-    res.redirect("/all");
-  } catch (err) {
-    if (err.code === "23505") {
+const validatePokemon = [
+  body("pokemon")
+    .trim()
+    .isAlpha()
+    .withMessage(`Pokemon name ${alphaErr}`)
+    .isLength({ min: 1, max: 10 })
+    .withMessage(`Pokemon name ${lengthErr}`),
+];
+
+const createPokemonPost = [
+  validatePokemon,
+  async (req, res) => {
+    const { type, pokemon } = req.body;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
       const types = await db.getAllTypes();
       return res.status(400).render("create-pokemon", {
         title: "Create pokemon",
         types,
-        errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
+        errors: errors.array(),
       });
     }
-  }
-}
+
+    try {
+      await db.createPokemon(type, pokemon);
+      return res.redirect("/all");
+    } catch (err) {
+      // Handle duplicate Pokémon
+      if (err.code === "23505") {
+        const types = await db.getAllTypes();
+        return res.status(400).render("create-pokemon", {
+          title: "Create pokemon",
+          types,
+          errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
+          old: { type, pokemon },
+        });
+      }
+    }
+  },
+];
 
 module.exports = {
   indexGet,
