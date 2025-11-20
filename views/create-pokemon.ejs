@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h2><%= title %></h2>
+    <%- include('partials/errors.ejs') %>
+    <form action="/all/create" method="POST">
+      <label for="pokemon">Pokemon:</label>
+      <input type="text" name="pokemon" id="pokemon" required />
+      <label for="type">Type:</label>
+      <select name="type" id="type" required>
+        <% types.forEach((type) => { %>
+        <option value="<%= type.type %>"><%= type.type %></option>
+        <% }); %>
+      </select>
+      <button type="submit">Create</button>
+    </form>
+    <a href="/all">Back</a>
+    <br />
+    <a href="/">Home</a>
+  </body>
+</html>

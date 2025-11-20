@@ -21,7 +21,36 @@ async function allPokemonGet(req, res) {
   });
 }
 
+async function createPokemonGet(req, res) {
+  const types = await db.getAllTypes();
+
+  res.render("create-pokemon", {
+    title: "Create pokemon",
+    types,
+  });
+}
+
+async function createPokemonPost(req, res) {
+  const { type, pokemon } = req.body;
+
+  try {
+    await db.createPokemon(type, pokemon);
+    res.redirect("/all");
+  } catch (err) {
+    if (err.code === "23505") {
+      const types = await db.getAllTypes();
+      return res.status(400).render("create-pokemon", {
+        title: "Create pokemon",
+        types,
+        errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
+      });
+    }
+  }
+}
+
 module.exports = {
   indexGet,
   allPokemonGet,
+  createPokemonGet,
+  createPokemonPost,
 };
