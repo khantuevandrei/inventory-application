@@ -50,7 +50,7 @@ async function addPokemonToTrainer(trainer, pokemon) {
   );
 }
 
-async function createTypePokemon(type, pokemon) {
+async function createPokemon(type, pokemon) {
   await pool.query(
     `INSERT INTO pokemons (pokemon, typeid)
     VALUES ($2, (SELECT id FROM types WHERE type = $1))
@@ -68,5 +68,5 @@ module.exports = {
   createNewTrainer,
   getTrainerPokemon,
   addPokemonToTrainer,
-  createTypePokemon,
+  createPokemon,
 };
