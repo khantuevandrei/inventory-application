@@ -5,6 +5,11 @@ async function getAllTypes() {
   return result.rows;
 }
 
+async function createNewType(newType) {
+  await pool.query("INSERT INTO types (type) VALUES ($1);", [newType]);
+}
+
 module.exports = {
   getAllTypes,
+  createNewType,
 };
