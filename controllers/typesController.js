@@ -4,7 +4,7 @@ const { body, validationResult, matchedData } = require("express-validator");
 async function typesListGet(req, res) {
   const types = await db.getAllTypes();
 
-  res.render("index", {
+  res.render("types", {
     title: "Pokemons",
     types: types,
   });
