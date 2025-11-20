@@ -1,0 +1,53 @@
+const db = require("../db/queries");
+const { body, validationResult, matchedData } = require("express-validator");
+
+async function typesListGet(req, res) {
+  const types = await db.getAllTypes();
+
+  res.render("index", {
+    title: "Pokemons",
+    types: types,
+  });
+}
+
+function createTypeGet(req, res) {
+  res.render("createtype", {
+    title: "Create type",
+  });
+}
+
+const alphaErr = "must only contain letters.";
+const lengthErr = "must be between 1 and 10 characters.";
+
+const validateType = [
+  body("newType")
+    .trim()
+    .isAlpha()
+    .withMessage(`Type ${alphaErr}`)
+    .isLength({ min: 1, max: 10 })
+    .withMessage(`Type ${lengthErr}`),
+];
+
+createTypePost = [
+  validateType,
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).render("createtype", {
+        title: "Create type",
+        errors: errors.array(),
+      });
+    }
+
+    const { newType } = matchedData(req);
+    await db.createNewType(newType);
+    res.redirect("/");
+  },
+];
+
+module.exports = {
+  typesListGet,
+  createTypeGet,
+  createTypePost,
+};

@@ -11,11 +11,11 @@
       <h2>Types:</h2>
       <ul>
         <% types.forEach((type) => { %>
-        <li><a href=""> <%= type.type %> </a></li>
+        <li><a href="/types/<%= type.type %>"> <%= type.type %> </a></li>
         <br />
         <% }); %>
         <li>
-          <button><a href="/createtype">create type</a></button>
+          <button><a href="/types/create">create type</a></button>
         </li>
       </ul>
     </nav>
