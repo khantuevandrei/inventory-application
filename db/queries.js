@@ -22,9 +22,14 @@ async function getAllTrainers() {
   return result.rows;
 }
 
+async function createNewTrainer(newTrainer) {
+  await pool.query("INSERT INTO trainers (trainer) VALUES ($1);", [newTrainer]);
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
   getTypePokemons,
   getAllTrainers,
+  createNewTrainer,
 };
