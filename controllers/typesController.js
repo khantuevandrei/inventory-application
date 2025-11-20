@@ -5,7 +5,7 @@ async function typesListGet(req, res) {
   const types = await db.getAllTypes();
 
   res.render("types", {
-    title: "Pokemons",
+    title: "Pokemon types",
     types: types,
   });
 }
