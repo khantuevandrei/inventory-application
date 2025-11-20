@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= trainer %></title>
+  </head>
+  <body>
+    <h1><%= trainer %></h1>
+    <h2><%= title %></h2>
+    <%- include('partials/errors.ejs') %>
+    <form action="/trainers/<%= trainer %>/add" method="POST">
+      <label for="pokemon">Choose pokemon:</label>
+      <select name="pokemon" id="pokemon">
+        <% pokemonList.forEach((pokemon) => { %>
+        <option value="<%= pokemon.pokemon %>"><%= pokemon.pokemon %></option>
+        <% }); %>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+    <a href="/trainers/<%= trainer %>">Back</a>
+    <br />
+    <a href="/">Home</a>
+  </body>
+</html>

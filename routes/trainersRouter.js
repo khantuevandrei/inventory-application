@@ -7,5 +7,7 @@ trainersRouter.get("/", trainersController.trainersListGet);
 trainersRouter.get("/create", trainersController.createTrainerGet);
 trainersRouter.post("/create", trainersController.createTrainerPost);
 trainersRouter.get("/:trainer", trainersController.trainerPokemonListGet);
+trainersRouter.get("/:trainer/add", trainersController.trainerPokemonAddGet);
+trainersRouter.post("/:trainer/add", trainersController.trainerPokemonAddPost);
 
 module.exports = trainersRouter;

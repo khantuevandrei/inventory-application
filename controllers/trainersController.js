@@ -58,9 +58,42 @@ async function trainerPokemonListGet(req, res) {
   });
 }
 
+async function trainerPokemonAddGet(req, res) {
+  const { trainer } = req.params;
+
+  const pokemonList = await db.getAllPokemon();
+
+  res.render("add-pokemon", {
+    title: "Add pokemon:",
+    trainer,
+    pokemonList,
+  });
+}
+
+async function trainerPokemonAddPost(req, res) {
+  const { trainer } = req.params;
+  const { pokemon } = req.body;
+
+  try {
+    await db.addPokemonToTrainer(trainer, pokemon);
+    res.redirect(`/trainers/${trainer}`);
+  } catch (err) {
+    if (err.code === "23505") {
+      return res.status(400).render("add-pokemon", {
+        title: `Add pokemon:`,
+        trainer,
+        pokemonList: await db.getAllPokemon(),
+        errors: [{ msg: `${trainer} already has a ${pokemon}.` }],
+      });
+    }
+  }
+}
+
 module.exports = {
   trainersListGet,
   createTrainerGet,
   createTrainerPost,
   trainerPokemonListGet,
+  trainerPokemonAddGet,
+  trainerPokemonAddPost,
 };
