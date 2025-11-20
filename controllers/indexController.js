@@ -12,7 +12,7 @@ async function indexGet(req, res) {
   });
 }
 
-async function allGet(req, res) {
+async function allPokemonGet(req, res) {
   const pokemons = await db.getAllPokemon();
 
   res.render("all", {
@@ -23,5 +23,5 @@ async function allGet(req, res) {
 
 module.exports = {
   indexGet,
-  allGet,
+  allPokemonGet,
 };

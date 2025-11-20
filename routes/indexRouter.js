@@ -4,6 +4,6 @@ const indexController = require("../controllers/indexController");
 const indexRouter = Router();
 
 indexRouter.get("/", indexController.indexGet);
-indexRouter.get("/all", indexController.allGet);
+indexRouter.get("/all", indexController.allPokemonGet);
 
 module.exports = indexRouter;

@@ -10,14 +10,9 @@
     <nav>
       <ul>
         <% trainerPokemon.forEach((tp) => { %>
-        <li>
-          <a href="/trainers/<%= trainer.trainer %>"> <%= tp.pokemon %> </a>
-        </li>
+        <li><%= tp.pokemon %></li>
         <br />
         <% }); %>
-        <li>
-          <button><a href="/trainers/create">Add pokemon</a></button>
-        </li>
       </ul>
       <a href="/trainers">Back</a>
       <br />
