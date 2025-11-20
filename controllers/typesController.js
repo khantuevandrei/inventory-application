@@ -72,7 +72,7 @@ async function createTypePokemonPost(req, res) {
   const { pokemon } = req.body;
 
   try {
-    await db.createTypePokemon(type, pokemon);
+    await db.createPokemon(type, pokemon);
     res.redirect(`/types/${type}`);
   } catch (err) {
     if (err.code === "23505") {
