@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const indexRouter = require("./routes/indexRouter");
 const typesRouter = require("./routes/typesRouter");
+const trainersRouter = require("./routes/trainersRouter");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", indexRouter);
 app.use("/types", typesRouter);
+app.use("/trainers", trainersRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
