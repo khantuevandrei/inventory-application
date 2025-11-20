@@ -1,7 +1,8 @@
 const { Router } = require("express");
+const inventoryController = require("../controllers/inventoryController");
 
 const indexRouter = Router();
 
-indexRouter.get("/", (req, res) => res.render("index"));
+indexRouter.get("/", inventoryController.typesListGet);
 
 module.exports = indexRouter;
