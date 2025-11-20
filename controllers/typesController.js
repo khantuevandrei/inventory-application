@@ -67,23 +67,44 @@ async function createTypePokemonGet(req, res) {
   });
 }
 
-async function createTypePokemonPost(req, res) {
-  const { type } = req.params;
-  const { pokemon } = req.body;
+const validatePokemon = [
+  body("pokemon")
+    .trim()
+    .isAlpha()
+    .withMessage(`Pokemon name ${alphaErr}`)
+    .isLength({ min: 1, max: 10 })
+    .withMessage(`Pokemon name ${lengthErr}`),
+];
 
-  try {
-    await db.createPokemon(type, pokemon);
-    res.redirect(`/types/${type}`);
-  } catch (err) {
-    if (err.code === "23505") {
+const createTypePokemonPost = [
+  validatePokemon,
+  async (req, res) => {
+    const errors = validationResult(req);
+    const { type } = req.params;
+    const { pokemon } = req.body;
+
+    if (!errors.isEmpty()) {
       return res.status(400).render("create-type-pokemon", {
         title: `Create ${type} type pokemon`,
         type,
-        errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
+        errors: errors.array(),
       });
     }
-  }
-}
+
+    try {
+      await db.createPokemon(type, pokemon);
+      res.redirect(`/types/${type}`);
+    } catch (err) {
+      if (err.code === "23505") {
+        return res.status(400).render("create-type-pokemon", {
+          title: `Create ${type} type pokemon`,
+          type,
+          errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
+        });
+      }
+    }
+  },
+];
 
 module.exports = {
   typesListGet,
