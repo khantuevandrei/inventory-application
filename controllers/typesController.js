@@ -11,7 +11,7 @@ async function typesListGet(req, res) {
 }
 
 function createTypeGet(req, res) {
-  res.render("create", {
+  res.render("create-type", {
     title: "Create type",
   });
 }
@@ -34,7 +34,7 @@ createTypePost = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).render("createtype", {
+      return res.status(400).render("create-type", {
         title: "Create type",
         errors: errors.array(),
       });
