@@ -11,7 +11,7 @@ async function typesListGet(req, res) {
 }
 
 function createTypeGet(req, res) {
-  res.render("createtype", {
+  res.render("create", {
     title: "Create type",
   });
 }
@@ -46,8 +46,21 @@ createTypePost = [
   },
 ];
 
+async function typeListGet(req, res) {
+  const { type } = req.params;
+
+  const pokemons = await db.getTypePokemons(type);
+
+  res.render("pokemons", {
+    title: `${type} type pokemons`,
+    type,
+    pokemons,
+  });
+}
+
 module.exports = {
   typesListGet,
   createTypeGet,
   createTypePost,
+  typeListGet,
 };
