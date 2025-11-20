@@ -60,7 +60,7 @@ async function typeListGet(req, res) {
 
   const pokemons = await db.getTypePokemons(type);
 
-  res.render("pokemon", {
+  res.render("type-pokemon", {
     title: `${type} type pokemon`,
     type,
     pokemons,

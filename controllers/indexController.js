@@ -15,7 +15,7 @@ async function indexGet(req, res) {
 async function allPokemonGet(req, res) {
   const pokemons = await db.getAllPokemon();
 
-  res.render("all", {
+  res.render("pokemon", {
     title: "All pokemon",
     pokemons: pokemons,
   });
