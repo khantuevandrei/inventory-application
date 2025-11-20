@@ -46,8 +46,21 @@ createTrainerPost = [
   },
 ];
 
+async function trainerPokemonListGet(req, res) {
+  const { trainer } = req.params;
+
+  const trainerPokemon = await db.getTrainerPokemon(trainer);
+
+  res.render("trainer", {
+    title: `${trainer}'s pokemon`,
+    trainer,
+    trainerPokemon,
+  });
+}
+
 module.exports = {
   trainersListGet,
   createTrainerGet,
   createTrainerPost,
+  trainerPokemonListGet,
 };
