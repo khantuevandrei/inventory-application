@@ -32,6 +32,7 @@ createTypePost = [
   validateType,
   async (req, res) => {
     const errors = validationResult(req);
+    const { newType } = req.body;
 
     if (!errors.isEmpty()) {
       return res.status(400).render("create-type", {
@@ -40,9 +41,17 @@ createTypePost = [
       });
     }
 
-    const { newType } = matchedData(req);
-    await db.createNewType(newType);
-    res.redirect("/types");
+    try {
+      await db.createNewType(newType);
+      res.redirect("/types");
+    } catch (err) {
+      if (err.code === "23505") {
+        return res.status(400).render("create-type", {
+          title: "Create type",
+          errors: [{ msg: `Type "${newType}" already exists.` }],
+        });
+      }
+    }
   },
 ];
 
