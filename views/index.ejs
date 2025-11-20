@@ -8,7 +8,22 @@
   <body>
     <h1><%= title %></h1>
     <nav>
-      <h2>Types:</h2>
+      <h2>Trainers:</h2>
+      <ul>
+        <% trainers.forEach((trainer) => { %>
+        <li>
+          <a href="/trainers/<%= trainer.trainer %>">
+            <%= trainer.trainer %>
+          </a>
+        </li>
+        <br />
+        <% }); %>
+        <li>
+          <button><a href="/trainers/create">create trainer</a></button>
+        </li>
+      </ul>
+
+      <h2>Pokemon types:</h2>
       <ul>
         <% types.forEach((type) => { %>
         <li><a href="/types/<%= type.type %>"> <%= type.type %> </a></li>

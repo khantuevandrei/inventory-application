@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const typesController = require("../controllers/typesController");
+const indexController = require("../controllers/indexController");
 
 const indexRouter = Router();
 
-indexRouter.get("/", typesController.typesListGet);
+indexRouter.get("/", indexController.indexGet);
 
 module.exports = indexRouter;
