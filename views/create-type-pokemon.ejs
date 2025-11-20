@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= type %></title>
+  </head>
+  <body>
+    <h2><%= title %></h2>
+    <%- include('partials/errors.ejs') %>
+    <form action="/types/<%= type %>/create" method="POST">
+      <label for="pokemon">New pokemon:</label>
+      <input type="text" name="pokemon" id="pokemon" />
+      <button type="submit">Add</button>
+    </form>
+    <a href="/types/<%= type %>">Back</a>
+    <br />
+    <a href="/">Home</a>
+  </body>
+</html>

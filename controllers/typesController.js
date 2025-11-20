@@ -58,9 +58,38 @@ async function typeListGet(req, res) {
   });
 }
 
+async function createTypePokemonGet(req, res) {
+  const { type } = req.params;
+
+  res.render("create-type-pokemon", {
+    title: `Create ${type} type pokemon`,
+    type,
+  });
+}
+
+async function createTypePokemonPost(req, res) {
+  const { type } = req.params;
+  const { pokemon } = req.body;
+
+  try {
+    await db.createTypePokemon(type, pokemon);
+    res.redirect(`/types/${type}`);
+  } catch (err) {
+    if (err.code === "23505") {
+      return res.status(400).render("create-type-pokemon", {
+        title: `Create ${type} type pokemon`,
+        type,
+        errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
+      });
+    }
+  }
+}
+
 module.exports = {
   typesListGet,
   createTypeGet,
   createTypePost,
   typeListGet,
+  createTypePokemonGet,
+  createTypePokemonPost,
 };
