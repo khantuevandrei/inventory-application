@@ -42,7 +42,7 @@ createTypePost = [
 
     const { newType } = matchedData(req);
     await db.createNewType(newType);
-    res.redirect("/");
+    res.redirect("/types");
   },
 ];
 
