@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <nav>
+      <h2>Types:</h2>
+      <ul>
+        <% trainers.forEach((trainer) => { %>
+        <li><a href="/types/<%= type.type %>"> <%= trainer.trainer %> </a></li>
+        <br />
+        <% }); %>
+        <li>
+          <button><a href="/types/create">create type</a></button>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

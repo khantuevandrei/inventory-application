@@ -1,7 +1,7 @@
 const pool = require("./pool");
 
 async function getAllTypes() {
-  const result = await pool.query("SELECT * FROM types");
+  const result = await pool.query("SELECT type FROM types");
   return result.rows;
 }
 
@@ -17,8 +17,14 @@ async function getTypePokemons(type) {
   return result.rows;
 }
 
+async function getAllTrainers() {
+  const result = await pool.query("SELECT trainer FROM trainers");
+  return result.rows;
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
   getTypePokemons,
+  getAllTrainers,
 };
