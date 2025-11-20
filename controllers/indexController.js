@@ -12,6 +12,16 @@ async function indexGet(req, res) {
   });
 }
 
+async function allGet(req, res) {
+  const pokemons = await db.getAllPokemon();
+
+  res.render("all", {
+    title: "All pokemon",
+    pokemons: pokemons,
+  });
+}
+
 module.exports = {
   indexGet,
+  allGet,
 };

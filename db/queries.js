@@ -9,6 +9,11 @@ async function createNewType(newType) {
   await pool.query("INSERT INTO types (type) VALUES ($1);", [newType]);
 }
 
+async function getAllPokemon() {
+  const result = await pool.query("SELECT pokemon FROM pokemons");
+  return result.rows;
+}
+
 async function getTypePokemons(type) {
   const result = await pool.query(
     "SELECT pokemon FROM pokemons JOIN types ON pokemons.typeid = types.id WHERE types.type = ($1)",
@@ -29,6 +34,7 @@ async function createNewTrainer(newTrainer) {
 module.exports = {
   getAllTypes,
   createNewType,
+  getAllPokemon,
   getTypePokemons,
   getAllTrainers,
   createNewTrainer,
