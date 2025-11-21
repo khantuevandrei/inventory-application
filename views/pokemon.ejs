@@ -9,7 +9,16 @@
     <h1><%= title %></h1>
     <ul>
       <% pokemons.forEach(pokemon => { %>
-      <li><%= pokemon.pokemon %></li>
+      <li>
+        <%= pokemon.pokemon %>
+        <form
+          action="/pokemon/<%=pokemon.id%>?_method=DELETE"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">delete</button>
+        </form>
+      </li>
       <br />
       <% }) %>
       <a href="/pokemon/create"><button>Create pokemon</button></a>

@@ -75,9 +75,16 @@ const createPokemonPost = [
   },
 ];
 
+async function pokemonDelete(req, res) {
+  const id = req.params.id;
+  await db.deletePokemon(id);
+  res.redirect("/pokemon");
+}
+
 module.exports = {
   indexGet,
   allPokemonGet,
   createPokemonGet,
   createPokemonPost,
+  pokemonDelete,
 };

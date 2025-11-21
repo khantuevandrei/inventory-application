@@ -10,7 +10,7 @@ async function createNewType(newType) {
 }
 
 async function getAllPokemon() {
-  const result = await pool.query("SELECT pokemon FROM pokemons");
+  const result = await pool.query("SELECT * FROM pokemons");
   return result.rows;
 }
 
@@ -59,6 +59,10 @@ async function createPokemon(type, pokemon) {
   );
 }
 
+async function deletePokemon(id) {
+  await pool.query("DELETE FROM pokemons WHERE id = $1", [id]);
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
@@ -69,4 +73,5 @@ module.exports = {
   getTrainerPokemon,
   addPokemonToTrainer,
   createPokemon,
+  deletePokemon,
 };
