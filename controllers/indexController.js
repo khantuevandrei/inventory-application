@@ -59,7 +59,7 @@ const createPokemonPost = [
 
     try {
       await db.createPokemon(type, pokemon);
-      return res.redirect("/all");
+      return res.redirect("/pokemon");
     } catch (err) {
       if (err.code === "23505") {
         const types = await db.getAllTypes();
