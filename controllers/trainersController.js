@@ -89,6 +89,12 @@ async function trainerPokemonAddPost(req, res) {
   }
 }
 
+async function trainerDelete(req, res) {
+  const id = req.params.id;
+  await db.deleteTrainer(id);
+  res.redirect("/trainers");
+}
+
 module.exports = {
   trainersListGet,
   createTrainerGet,
@@ -96,4 +102,5 @@ module.exports = {
   trainerPokemonListGet,
   trainerPokemonAddGet,
   trainerPokemonAddPost,
+  trainerDelete,
 };

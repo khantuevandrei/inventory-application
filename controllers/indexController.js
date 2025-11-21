@@ -61,14 +61,12 @@ const createPokemonPost = [
       await db.createPokemon(type, pokemon);
       return res.redirect("/all");
     } catch (err) {
-      // Handle duplicate Pokémon
       if (err.code === "23505") {
         const types = await db.getAllTypes();
         return res.status(400).render("create-pokemon", {
           title: "Create pokemon",
           types,
           errors: [{ msg: `Pokemon "${pokemon}" already exists.` }],
-          old: { type, pokemon },
         });
       }
     }
