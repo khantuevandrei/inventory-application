@@ -115,6 +115,12 @@ const createTypePokemonPost = [
   },
 ];
 
+async function typeDelete(req, res) {
+  const type = req.params.type;
+  await db.deleteType(type);
+  res.redirect("/types");
+}
+
 module.exports = {
   typesListGet,
   createTypeGet,
@@ -122,4 +128,5 @@ module.exports = {
   typeListGet,
   createTypePokemonGet,
   createTypePokemonPost,
+  typeDelete,
 };

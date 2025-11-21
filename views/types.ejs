@@ -10,7 +10,16 @@
     <nav>
       <ul>
         <% types.forEach((type) => { %>
-        <li><a href="/types/<%= type.type %>"> <%= type.type %> </a></li>
+        <li>
+          <a href="/types/<%= type.type %>"> <%= type.type %> </a>
+          <form
+            action="/types/<%=type.type%>/?_method=DELETE"
+            method="POST"
+            style="display: inline"
+          >
+            <button type="submit">delete</button>
+          </form>
+        </li>
         <br />
         <% }); %>
         <a href="/types/create"><button>create type</button></a>

@@ -76,6 +76,10 @@ async function deleteTrainerPokemon(trainer, pokemon) {
   );
 }
 
+async function deleteType(type) {
+  await pool.query("DELETE FROM types WHERE type = $1", [type]);
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
@@ -89,4 +93,5 @@ module.exports = {
   deletePokemon,
   deleteTrainer,
   deleteTrainerPokemon,
+  deleteType,
 };
