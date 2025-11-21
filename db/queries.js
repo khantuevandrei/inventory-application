@@ -84,6 +84,13 @@ async function renameType(type, newType) {
   await pool.query("UPDATE types SET type=$2 WHERE type = $1", [type, newType]);
 }
 
+async function renameTrainer(trainer, newTrainer) {
+  await pool.query("UPDATE trainers SET trainer=$2 WHERE trainer= $1", [
+    trainer,
+    newTrainer,
+  ]);
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
@@ -99,4 +106,5 @@ module.exports = {
   deleteTrainerPokemon,
   deleteType,
   renameType,
+  renameTrainer,
 };

@@ -102,6 +102,23 @@ async function pokemonDelete(req, res) {
   res.redirect(`/trainers/${trainer}`);
 }
 
+async function renameTrainerGet(req, res) {
+  const { trainer } = req.params;
+
+  res.render("rename-trainer", {
+    title: `Rename ${trainer}`,
+    trainer,
+  });
+}
+
+async function renameTrainerPost(req, res) {
+  const { trainer } = req.params;
+  const { newTrainer } = req.body;
+  await db.renameTrainer(trainer, newTrainer);
+
+  res.redirect("/trainers");
+}
+
 module.exports = {
   trainersListGet,
   createTrainerGet,
@@ -111,4 +128,6 @@ module.exports = {
   trainerPokemonAddPost,
   trainerDelete,
   pokemonDelete,
+  renameTrainerGet,
+  renameTrainerPost,
 };

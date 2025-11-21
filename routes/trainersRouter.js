@@ -11,5 +11,7 @@ trainersRouter.get("/:trainer/add", trainersController.trainerPokemonAddGet);
 trainersRouter.post("/:trainer/add", trainersController.trainerPokemonAddPost);
 trainersRouter.delete("/:id", trainersController.trainerDelete);
 trainersRouter.delete("/:trainer/:pokemon", trainersController.pokemonDelete);
+trainersRouter.get("/:trainer/rename", trainersController.renameTrainerGet);
+trainersRouter.post("/:trainer/rename", trainersController.renameTrainerPost);
 
 module.exports = trainersRouter;

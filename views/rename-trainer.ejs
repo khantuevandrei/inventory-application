@@ -8,13 +8,13 @@
   <body>
     <h1><%= title %></h1>
     <%- include('partials/errors.ejs') %>
-    <form action="/types/<%=type%>/rename" method="POST">
-      <label for="newType">New type name:</label>
-      <input type="text" name="newType" id="newType" />
+    <form action="/trainers/<%=trainer%>/rename" method="POST">
+      <label for="newTrainer">New trainer name:</label>
+      <input type="text" name="newTrainer" id="newTrainer" />
       <button type="submit">Submit</button>
     </form>
     <br />
-    <a href="/types">Back</a>
+    <a href="/trainers">Back</a>
     <br />
     <a href="/">Home</a>
   </body>
