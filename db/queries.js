@@ -91,6 +91,13 @@ async function renameTrainer(trainer, newTrainer) {
   ]);
 }
 
+async function renamePokemon(pokemon, newPokemon) {
+  await pool.query("UPDATE pokemons SET pokemon=$2 WHERE pokemon= $1", [
+    pokemon,
+    newPokemon,
+  ]);
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
@@ -107,4 +114,5 @@ module.exports = {
   deleteType,
   renameType,
   renameTrainer,
+  renamePokemon,
 };

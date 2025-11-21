@@ -79,10 +79,29 @@ async function pokemonDelete(req, res) {
   res.redirect("/pokemon");
 }
 
+async function renamePokemonGet(req, res) {
+  const { pokemon } = req.params;
+
+  res.render("rename-pokemon", {
+    title: `Rename ${pokemon}`,
+    pokemon,
+  });
+}
+
+async function renamePokemonPost(req, res) {
+  const { pokemon } = req.params;
+  const { newPokemon } = req.body;
+  await db.renamePokemon(pokemon, newPokemon);
+
+  res.redirect("/pokemon");
+}
+
 module.exports = {
   indexGet,
   allPokemonGet,
   createPokemonGet,
   createPokemonPost,
   pokemonDelete,
+  renamePokemonGet,
+  renamePokemonPost,
 };

@@ -11,6 +11,10 @@
       <% pokemons.forEach(pokemon => { %>
       <li>
         <%= pokemon.pokemon %>
+        <a href="/pokemon/<%= pokemon.pokemon %>/rename"
+          ><button>rename</button></a
+        >
+
         <form
           action="/pokemon/<%=pokemon.id%>?_method=DELETE"
           method="POST"
