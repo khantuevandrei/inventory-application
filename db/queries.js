@@ -67,6 +67,15 @@ async function deleteTrainer(id) {
   await pool.query("DELETE FROM trainers WHERE id = $1", [id]);
 }
 
+async function deleteTrainerPokemon(trainer, pokemon) {
+  await pool.query(
+    `DELETE FROM trainer_pokemon
+    WHERE trainerid=(SELECT id FROM trainers WHERE trainer=$1)
+    AND pokemonid=(SELECT id FROM pokemons WHERE pokemon=$2)`,
+    [trainer, pokemon]
+  );
+}
+
 module.exports = {
   getAllTypes,
   createNewType,
@@ -79,4 +88,5 @@ module.exports = {
   createPokemon,
   deletePokemon,
   deleteTrainer,
+  deleteTrainerPokemon,
 };

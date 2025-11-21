@@ -10,7 +10,16 @@
     <nav>
       <ul>
         <% trainerPokemon.forEach((tp) => { %>
-        <li><%= tp.pokemon %></li>
+        <li>
+          <%= tp.pokemon %>
+          <form
+            action="/trainers/<%=trainer%>/<%=tp.pokemon%>?_method=DELETE"
+            method="POST"
+            style="display: inline"
+          >
+            <button type="submit">delete</button>
+          </form>
+        </li>
         <br />
         <% }); %>
         <a href="/trainers/<%= trainer %>/add"><button>Add pokemon</button></a>
