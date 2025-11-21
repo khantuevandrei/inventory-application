@@ -116,8 +116,25 @@ const createTypePokemonPost = [
 ];
 
 async function typeDelete(req, res) {
-  const type = req.params.type;
+  const { type } = req.params;
   await db.deleteType(type);
+  res.redirect("/types");
+}
+
+async function renameTypeGet(req, res) {
+  const { type } = req.params;
+
+  res.render("rename-type", {
+    title: `Rename ${type}`,
+    type,
+  });
+}
+
+async function renameTypePost(req, res) {
+  const { type } = req.params;
+  const { newType } = req.body;
+  await db.renameType(type, newType);
+
   res.redirect("/types");
 }
 
@@ -129,4 +146,6 @@ module.exports = {
   createTypePokemonGet,
   createTypePokemonPost,
   typeDelete,
+  renameTypeGet,
+  renameTypePost,
 };

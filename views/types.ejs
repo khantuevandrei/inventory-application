@@ -12,6 +12,7 @@
         <% types.forEach((type) => { %>
         <li>
           <a href="/types/<%= type.type %>"> <%= type.type %> </a>
+          <a href="/types/<%= type.type %>/rename"><button>rename</button></a>
           <form
             action="/types/<%=type.type%>/?_method=DELETE"
             method="POST"
